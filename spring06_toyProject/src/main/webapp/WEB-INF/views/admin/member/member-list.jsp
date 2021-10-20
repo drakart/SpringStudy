@@ -7,7 +7,7 @@
 </head>
 <body>
 <h1>회원 목록</h1>
-<table>
+<table border="1">
 	<thead>
 		<tr>
 			<th>아이디</th>
