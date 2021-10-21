@@ -35,10 +35,19 @@
 				<prop key="mail.smtp.ssl.protocols">TLSv1.2</prop>
 				<prop key="mail.smtp.auth">true</prop>
 				<prop key="mail.debug">true</prop>
-			</props>
-		
+			</props>		
 		</property>
-		
+	</bean>
+	
+	<bean id="simpleClientHttpRequestFactory"
+		class="org.springframework.http.client.SimpleClientHttpRequestFactory">
+		<property name="readTimeout" value="5000"/>
+		<property name="connectTimeout" value="5000"/>
+	</bean>
+	
+	<bean id="restTemplate"
+		class="org.springframework.web.client.RestTemplate">
+		<constructor-arg name="requestFactory" ref="simpleClientHttpRequestFactory"/>
 	</bean>
 	
 	<mybatis-spring:scan base-package="com.kh.spring" annotation="org.apache.ibatis.annotations.Mapper"/>

@@ -16,7 +16,7 @@ public enum ErrorCode {
 	
 	private ErrorCode(String msg) {
 		this.MESSAGE = msg;
-		this.URL = "/index";
+		this.URL = "/";
 	}
 	
 	private ErrorCode(String msg, String url) {
