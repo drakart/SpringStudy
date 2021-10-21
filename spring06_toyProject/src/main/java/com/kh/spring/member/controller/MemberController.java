@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.CookieGenerator;
 
 import com.kh.spring.common.validator.ValidateResult;
@@ -80,7 +81,7 @@ public class MemberController {
 		webDataBinder.addValidators(joinFormValidator);
 	}
 
-	@GetMapping("join-form")
+	@GetMapping("join")
 	public void joinForm(Model model) {
 		model.addAttribute(new JoinForm()).addAttribute("error", new ValidateResult().getError());
 		
@@ -97,7 +98,7 @@ public class MemberController {
 		
 		if(errors.hasErrors()) {		
 			vr.addErrors(errors);
-			return "member/join-form";
+			return "member/join";
 		}
 		
 		memberService.insertMember(form);
@@ -119,8 +120,15 @@ public class MemberController {
 	//메서드명 : loginImpl
 	//재지정할 jsp : mypage
 	@PostMapping("login")
-	public String loginImpl(Member member, HttpSession session) {
+	public String loginImpl(Member member, HttpSession session, RedirectAttributes redirectAttr) {
+		
 		Member certifiedUser = memberService.authenticateUser(member);
+		
+		if(certifiedUser == null) {
+			redirectAttr.addFlashAttribute("message", "아이디나 비밀번호가 정확하지 않습니다.");
+			return "redirect:/member/login";
+		}
+		
 		session.setAttribute("authentication", certifiedUser);
 		logger.debug(certifiedUser.toString());
 		return "redirect:/member/mypage";

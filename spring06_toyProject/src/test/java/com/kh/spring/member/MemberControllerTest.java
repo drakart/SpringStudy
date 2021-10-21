@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -32,6 +33,7 @@ public class MemberControllerTest {
    
    @Autowired
    WebApplicationContext wac;
+   
    MockMvc mockMvc;
    
    @Before
@@ -101,8 +103,6 @@ public class MemberControllerTest {
 	   .andExpect(status().isOk())
 	   .andDo(print());
    }
-
-   
    
    
    

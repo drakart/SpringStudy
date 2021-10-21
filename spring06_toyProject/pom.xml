@@ -44,7 +44,13 @@
 		    <artifactId>spring-context-support</artifactId>
 		    <version>5.3.10</version>
 		</dependency>
-		      
+		<!-- mail -->
+		<dependency>
+		    <groupId>com.sun.mail</groupId>
+		    <artifactId>javax.mail</artifactId>
+		    <version>1.6.2</version>
+		</dependency>
+			      
             
       <!-- AspectJ -->
       <dependency>
