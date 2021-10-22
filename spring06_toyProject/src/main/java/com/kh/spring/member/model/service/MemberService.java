@@ -2,6 +2,7 @@ package com.kh.spring.member.model.service;
 
 import org.springframework.http.MediaType;
 import org.springframework.http.RequestEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -13,28 +14,33 @@ import com.kh.spring.member.model.dto.Member;
 import com.kh.spring.member.model.repository.MemberRepository;
 import com.kh.spring.member.valiator.JoinForm;
 
+import lombok.Data;
+import lombok.RequiredArgsConstructor;
+
 @Service
+@RequiredArgsConstructor
 public class MemberService {
 
-	private MemberRepository memberRepository;
-	private MailSender mailSender;
-	private RestTemplate http;
+	private final MemberRepository memberRepository;
+	private final MailSender mailSender;
+	private final RestTemplate http;
+	private final PasswordEncoder passwordEncoder;
 	
-	public MemberService(MemberRepository memberRepository, MailSender mailSender, RestTemplate http) {
-		super();
-		this.memberRepository = memberRepository;
-		this.mailSender = mailSender;
-		this.http = http;
-	}
-
 	public void insertMember(JoinForm form) {
-
+		form.setPassword(passwordEncoder.encode(form.getPassword()));
 		memberRepository.insertMember(form);
 
 	}
 
 	public Member authenticateUser(Member member) {
-			return memberRepository.authenticateUser(member);
+		Member storedMember = memberRepository.selectMemberByUserId(member.getUserId());
+		
+		if(passwordEncoder.matches(member.getPassword(), storedMember.getPassword())) {
+			return storedMember;
+		}
+		
+		return null;
+		
 	}
 
 	public Member selectMemberByUserId(String userId) {

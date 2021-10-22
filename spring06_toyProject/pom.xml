@@ -50,14 +50,7 @@
 		    <artifactId>spring-security-crypto</artifactId>
 		    <version>5.5.2</version>
 		</dependency>
-		
-		<!-- mail -->
-		<dependency>
-		    <groupId>com.sun.mail</groupId>
-		    <artifactId>javax.mail</artifactId>
-		    <version>1.6.2</version>
-		</dependency>
-			      
+			   
             
       <!-- AspectJ -->
       <dependency>
@@ -178,7 +171,23 @@
          <artifactId>jstl</artifactId>
          <version>1.2</version>
       </dependency>
-   
+		
+		<!-- mail -->
+		<dependency>
+		    <groupId>com.sun.mail</groupId>
+		    <artifactId>javax.mail</artifactId>
+		    <version>1.6.2</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+		<dependency>
+		    <groupId>org.projectlombok</groupId>
+		    <artifactId>lombok</artifactId>
+		    <version>1.18.20</version>
+		    <scope>provided</scope>
+		</dependency>
+		
+		
       <!-- Test -->
       <dependency>
           <groupId>junit</groupId>
