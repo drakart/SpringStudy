@@ -50,6 +50,8 @@
 		<constructor-arg name="requestFactory" ref="simpleClientHttpRequestFactory"/>
 	</bean>
 	
+	<bean id="objectMapper" class="com.fasterxml.jackson.databind.ObjectMapper"/>
+	
 	<mybatis-spring:scan base-package="com.kh.spring" annotation="org.apache.ibatis.annotations.Mapper"/>
 	
 	
