@@ -1,6 +1,7 @@
 package com.kh.spring.board.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -11,6 +12,7 @@ import com.kh.spring.board.model.dto.Board;
 import com.kh.spring.board.model.repository.BoardRepository;
 import com.kh.spring.common.code.ErrorCode;
 import com.kh.spring.common.exception.HandlableException;
+import com.kh.spring.common.util.file.FileDTO;
 import com.kh.spring.common.util.file.FileUtil;
 
 import lombok.RequiredArgsConstructor;
@@ -32,6 +34,14 @@ public class BoardServiceImpl implements BoardService{
 			}
 		}
 		
+	}
+
+	@Override
+	public Map<String, Object> selectBoardByIdx(String bdIdx) {
+		
+		Board board = boardRepository.selectBoardByIdx(bdIdx);
+		List<FileDTO> files = boardRepository.selectFilesByBdIdx(bdIdx);
+		return Map.of("board",board,"files",files);
 	}
 	
 	

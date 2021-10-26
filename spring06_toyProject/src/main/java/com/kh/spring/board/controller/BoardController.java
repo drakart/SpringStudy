@@ -2,10 +2,12 @@ package com.kh.spring.board.controller;
 
 
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -47,6 +49,13 @@ public class BoardController {
 		boardService.insertBoard(files, board);
 		
 		return "redirect:/"; 
+	}
+	
+	@GetMapping("board-detail")
+	public void boardDetail(Model model, String bdIdx) {
+		Map<String, Object> commandMap = boardService.selectBoardByIdx(bdIdx);
+		model.addAllAttributes(commandMap);
+		
 	}
 	
 }
