@@ -39,25 +39,24 @@ public class BoardControllerTest {
 	   
 	   @Test
 	   public void uploadBoardTest() throws Exception {
-		   
-		   MockMultipartFile file1 = 
-				   new MockMultipartFile("files", "OFN.txt",null,"firstFile".getBytes());
-		   MockMultipartFile file2 = 
-				   new MockMultipartFile("files", "OFN2.txt",null,"secondFile".getBytes());
-		   
-		   Member member = new Member();
-		   member.setUserId("test");
-		   
-		   mockMvc.perform(multipart("/board/upload")
-				   .file(file1)
-				   .file(file2)
-				   .contentType(MediaType.MULTIPART_FORM_DATA)
-				   .param("title", "게시글테스트")
-				   .param("content", "본문")
-				   .sessionAttr("authentication", member))
-		   .andExpect(status().is3xxRedirection())
-		   .andDo(print());
-		   
+	      
+	      MockMultipartFile file1=
+	            new MockMultipartFile("files", "OFN.txt",null,"firstFile".getBytes());
+	      MockMultipartFile file2=
+	            new MockMultipartFile("files", "OFN2.txt",null,"secondFile".getBytes());
+	      
+	      Member member = new Member();
+	      member.setUserId("DEV");
+	      
+	      mockMvc.perform(multipart("/board/upload")
+	            .file(file1)
+	            .file(file2)
+	            .contentType(MediaType.MULTIPART_FORM_DATA)
+	            .param("title", "트랜잭션테스트")
+	            .param("content","본문")
+	            .sessionAttr("authentication", member))
+	      .andExpect(status().is3xxRedirection())
+	      .andDo(print());
 	   }
 	
 }

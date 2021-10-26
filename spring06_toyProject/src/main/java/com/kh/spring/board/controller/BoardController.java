@@ -1,7 +1,6 @@
 package com.kh.spring.board.controller;
 
-import java.io.File;
-import java.io.IOException;
+
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -16,8 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.spring.board.model.dto.Board;
 import com.kh.spring.board.model.service.BoardService;
-import com.kh.spring.common.code.Config;
-import com.kh.spring.common.util.file.FileUtil;
+
 import com.kh.spring.member.model.dto.Member;
 
 import lombok.RequiredArgsConstructor;
@@ -40,6 +38,11 @@ public class BoardController {
 			,@SessionAttribute("authentication") Member member
 			,Board board
 			) {
+		
+		logger.debug("filesSize : " + files.size());
+		logger.debug("files.0 : " + files.get(0));
+		logger.debug("mf.isEmpty : " + files.get(0).isEmpty());
+		
 		board.setUserId(member.getUserId());
 		boardService.insertBoard(files, board);
 		
