@@ -13,6 +13,7 @@ import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -23,7 +24,16 @@ public class BaseballBatch {
 	@Autowired
 	private BatchRepository batchRepository;
 
-	public void jsoupTest() {
+	//cron 표현식
+	//초 분 시 일 월 요일(0~6) 년(스프링에서는 사용안함)
+	// * : 모든
+	// , : 복수 값을 지정
+	// 시작시간/단위 : 시작시간부터 지정한 단위마다 실행
+	// 0 0 3 * * * => 매일 새벽 3시에 배치를 실행
+	// 0 0 3,6,22 * * * => 새벽 3시, 아침 6시, 밤 10시에 배치를 실행
+	// 0 0/15 * * * * => 15분마다 배치를 실행
+	@Scheduled(cron = "0 20 15 7 12 *")
+	public void baseballRankBatch() {
 		try {
 			Document doc = Jsoup.connect("https://www.koreabaseball.com/TeamRank/TeamRank.aspx").get();
 			Elements teamList = doc.select("#cphContents_cphContents_cphContents_udpRecord > table > tbody > tr");
@@ -35,6 +45,8 @@ public class BaseballBatch {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
+		logger.debug("수고많으셨습니다.");
 	}
 
 	private List<Map<String, String>> getRankDataList(Elements teamList) {
