@@ -113,24 +113,47 @@
          <artifactId>javax.inject</artifactId>
          <version>1</version>
       </dependency>
+      
       <!-- 마이바티스 -->
       <dependency>
              <groupId>org.mybatis</groupId>
              <artifactId>mybatis-spring</artifactId>
              <version>2.0.6</version>
       </dependency>
+      
       <!-- 마이바티스 데이터베이스 커넥션풀 apache commons dbcp -->
       <dependency>
           <groupId>org.apache.commons</groupId>
           <artifactId>commons-dbcp2</artifactId>
           <version>2.8.0</version>
       </dependency>
+      
       <!-- ojdbc -->
       <dependency>
-          <groupId>oracle</groupId>
-          <artifactId>ojdbc6</artifactId>
-          <version>11.2.0.3</version>
-      </dependency>
+	    <groupId>com.oracle.database.jdbc</groupId>
+	    <artifactId>ojdbc8</artifactId>
+	    <version>19.8.0.0</version>
+	</dependency>
+	<dependency>
+	    <groupId>com.oracle.database.jdbc</groupId>
+	    <artifactId>ucp</artifactId>
+	    <version>19.8.0.0</version>
+	</dependency>	
+	<dependency>
+    	<groupId>com.oracle.database.security</groupId>
+    	<artifactId>oraclepki</artifactId>
+    	<version>19.8.0.0</version>
+	</dependency>	
+	<dependency>
+	    <groupId>com.oracle.database.security</groupId>
+	    <artifactId>osdt_cert</artifactId>
+	    <version>19.8.0.0</version>
+	</dependency>	
+	<dependency>
+	    <groupId>com.oracle.database.security</groupId>
+	    <artifactId>osdt_core</artifactId>
+	    <version>19.8.0.0</version>
+	</dependency>
       
       <!-- json parse -->
       <dependency>
